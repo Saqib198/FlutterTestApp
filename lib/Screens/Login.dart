@@ -64,7 +64,10 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+      WillPopScope(
+        onWillPop: () => Future.value(false),
+      child:Scaffold(
       body: Container(
         alignment: Alignment.center,
         child: SingleChildScrollView(
@@ -151,6 +154,7 @@ class _LoginState extends State<Login> {
             ),
           ),
         ),
+      ),
       ),
     );
   }

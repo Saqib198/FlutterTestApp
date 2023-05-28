@@ -97,7 +97,6 @@ class _DashboardState extends State<Dashboard> {
       }
     }
 
-    // Return a default image if weatherData is null or weather code is not matched
     return 'assets/weather/sunny.png';
   }
 
@@ -160,7 +159,9 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     EasyLoading.dismiss();
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: () => Future.value(false),
+      child: Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
@@ -297,6 +298,8 @@ class _DashboardState extends State<Dashboard> {
         backgroundColor: AppColors.primaryColor,
         indicatorHeight: 0,
       ),
+
+      )
     );
   }
 }

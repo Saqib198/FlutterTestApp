@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutterapp/widgets.dart';
 import 'package:flutterapp/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Dashboard.dart';
 import 'Login.dart';
@@ -70,7 +71,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: () => Future.value(false),
+      child:Scaffold(
       appBar: AppBar(
         title: Text(
           'Profile',
@@ -181,6 +184,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         backgroundColor: AppColors.primaryColor,
         indicatorHeight: 0,
       ),
+    )
     );
   }
 
@@ -201,6 +205,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove("_email");
+    await prefs.remove("_password");
+
     await FirebaseAuth.instance.signOut();
     Navigator.pushReplacement(
       context,
