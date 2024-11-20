@@ -1,4 +1,4 @@
-# flutterapp
+# flutter
 
 Flutter App for Technaical Test
 
